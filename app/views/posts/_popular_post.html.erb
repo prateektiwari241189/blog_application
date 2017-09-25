@@ -1,0 +1,7 @@
+<h2>Popular Posts</h2>
+<%  @posts.limit(5).each do |post| %>
+<div class="popular-post">
+	<h2 class="title"><%= link_to post.title, post%></h2>
+    <%= image_tag post.image_url.to_s  ,{:style => "width:300px;"} %>
+</div>
+<% end %>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blogs</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- <div id="sidebar">
+    <div id="logo">
+      <%#= link_to root_path do %>
+        <%#= image_tag "logo.png" ,{:style => "width:80px; height:50px"} %>
+      <%# end %>
+    </div>
+    
+    <ul>
+      <li><%#= link_to "Blog", root_path %></li>
+    </ul>
+    
+    <ul>
+      <li class="category">Social</li>
+			<li><a href="https://twitter.com/">Twitter</a></li>
+			<li><a href="http://instagram.com/">Instagram</a></li>
+			<li><a href="https://github.com/">Github</a></li>
+    </ul>
+
+  </div> -->
+  
+  <div id="main_content">
+    <div id="header">
+      <% if current_page?(root_path) %>
+      <p>All Posts</p>
+      <% else %>
+      <%= link_to "Back to All Posts", root_path %>
+      <% end %>
+      
+      <div class="buttons">
+      <% if user_signed_in? %>
+        <button class="button"><%= link_to "New Post", new_post_path %></button>
+        <button class="button"><%= link_to "Sign Up as Admin", new_user_registration_path %></button>
+        <button class="button"><%= link_to "Log Out", destroy_user_session_path, method: :delete %></button>
+      <% else %>
+        <button class="button"><%= link_to "Admin Sign In", new_user_session_path%></button>
+        
+      <% end %>
+      </div>
+    </div>
+    
+    <% flash.each do |message_type,message| %>
+      <%= content_tag(:div, message, class: "alert") %>
+    <% end %>
+
+  <%= yield %>
+  </div>
+
+
+</body>
+</html>
